@@ -1,6 +1,9 @@
 import { BsFillPersonDashFill, BsPersonCircle } from 'react-icons/bs';
 import PropTypes from 'prop-types';
-import { removeContacts } from 'redux/contacts/contactsOperations';
+import {
+  removeContacts,
+  fetchContacts,
+} from 'redux/contacts/contactsOperations';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as contactsSelectors from 'redux/contacts/contactsSelectors';
@@ -28,6 +31,7 @@ const ContactList = () => {
 
   const deleteContacts = id => {
     dispatch(removeContacts(id));
+    dispatch(fetchContacts());
     toast.error('Сontact deleted!', toastOptions);
   };
 
