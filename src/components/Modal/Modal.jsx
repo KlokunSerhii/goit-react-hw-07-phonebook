@@ -15,24 +15,26 @@ import {
   ModalDiv,
   Title,
 } from './Modal.styled';
-import { addContacts } from 'redux/contacts/sliceContacts';
+import { addContacts } from 'redux/contacts/contactsOperations';
 import { toastOptions } from '../../options/toastOptions';
 import { closeModal } from 'redux/modal/sliceModal';
+import { nanoid } from '@reduxjs/toolkit';
+import * as contactsSelectors from 'redux/contacts/contactsSelectors';
 
 const modalRood = document.querySelector('#modal-root');
 
 function Modal() {
   const name = '';
-  const number = '';
-  const { contacts } = useSelector(state => state.contacts);
+  const phone = '';
+  const data = useSelector(contactsSelectors.selectContacts);
   const dispatch = useDispatch();
 
-  const handleSubmit = ({ name, number }) => {
-    const find = contacts.find(
+  const handleSubmit = ({ name, phone }) => {
+    const find = data.find(
       element => element.name.toLowerCase() === name.toLowerCase()
     );
     if (!find) {
-      dispatch(addContacts({ name, number }));
+      dispatch(addContacts({ id: nanoid(), name, phone }));
       dispatch(closeModal());
       toast.success('Contact added', toastOptions);
       return;
@@ -64,7 +66,7 @@ function Modal() {
         <Title>Phonebook</Title>
 
         <Formik
-          initialValues={{ name, number }}
+          initialValues={{ name, phone }}
           validationSchema={SignupSchema}
           onSubmit={handleSubmit}
         >
@@ -74,9 +76,9 @@ function Modal() {
             </Label>
             <ErrorMessage name="name" />
             <Label>
-              <Input type="tel" name="number" placeholder="Number" />
+              <Input type="tel" name="phone" placeholder="Number" />
             </Label>
-            <ErrorMessage name="number" />
+            <ErrorMessage name="phone" />
             <Button type="submit" aria-label="add contact">
               <BsFillPersonPlusFill />
             </Button>
