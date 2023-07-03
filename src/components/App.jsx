@@ -8,10 +8,16 @@ import Modal from 'components/Modal/Modal';
 import Filter from './Filter';
 import { Div, TitleList, Button, DivFlex } from './App.styled';
 import { openModal } from '../redux/modal/sliceModal';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/contacts/contactsOperations';
 
 const App = () => {
   const { isOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <Div>
