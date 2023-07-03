@@ -10,10 +10,13 @@ import { Div, TitleList, Button, DivFlex } from './App.styled';
 import { openModal } from '../redux/modal/sliceModal';
 import { useEffect } from 'react';
 import { fetchContacts } from 'redux/contacts/contactsOperations';
+import * as contactsSelectors from 'redux/contacts/contactsSelectors';
 
 const App = () => {
   const { isOpen } = useSelector(state => state.modal);
   const dispatch = useDispatch();
+  const isLoading = useSelector(contactsSelectors.selectIsLoading);
+  const error = useSelector(contactsSelectors.selectError);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -33,6 +36,8 @@ const App = () => {
         <Filter />
       </DivFlex>
       {isOpen && <Modal />}
+      {isLoading && <b>Loading contacts...</b>}
+      {error && <b>{error}</b>}
       <ContactList />
       <ToastContainer />
     </Div>
