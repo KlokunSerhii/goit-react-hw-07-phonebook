@@ -1,10 +1,10 @@
 import { BsFillPersonDashFill, BsPersonCircle } from 'react-icons/bs';
 import PropTypes from 'prop-types';
-import { removeContacts } from 'redux/contacts/contactsOperations';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import * as contactsSelectors from 'redux/contacts/contactsSelectors';
 
+import {  removeContacts } from '../../redux/contacts/contactsOperations';
+import * as contactsSelectors from '../../redux/contacts/contactsSelectors';
 import { Button, Li, Ul } from './ContactList.styled';
 import { toastOptions } from '../../options/toastOptions';
 
@@ -14,14 +14,17 @@ const ContactList = () => {
 
   const dispatch = useDispatch();
 
+ 
+
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
     if (!data) {
       return;
-    }
-    return data.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
+    } 
+      return data.filter(contact => 
+        contact.name.toLowerCase().includes(normalizedFilter)
+        )
+
   };
 
   const filterContact = getVisibleContacts();
@@ -30,6 +33,7 @@ const ContactList = () => {
     dispatch(removeContacts(id));
     toast.error('Сontact deleted!', toastOptions);
   };
+
 
   return (
     <Ul>

@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
 
-import { SignupSchema } from '../../options/validForm';
 import {
   Label,
   Forma,
@@ -15,11 +15,11 @@ import {
   ModalDiv,
   Title,
 } from './Modal.styled';
-import { addContacts } from 'redux/contacts/contactsOperations';
+import { SignupSchema } from '../../options/validForm';
+import { addContacts } from '../../redux/contacts/contactsOperations';
 import { toastOptions } from '../../options/toastOptions';
-import { closeModal } from 'redux/modal/sliceModal';
-import { nanoid } from '@reduxjs/toolkit';
-import * as contactsSelectors from 'redux/contacts/contactsSelectors';
+import { closeModal } from '../../redux/modal/sliceModal';
+import * as contactsSelectors from '../../redux/contacts/contactsSelectors';
 
 const modalRood = document.querySelector('#modal-root');
 

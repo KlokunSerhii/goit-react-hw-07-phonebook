@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { HiSearch } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeFilter } from 'redux/filters/sliceFilters';
+import { changeFilter } from '../../redux/filters/sliceFilters';
 import { Label, Input } from './Filter.styled';
 
 const Filter = () => {
